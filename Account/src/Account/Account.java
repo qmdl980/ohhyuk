@@ -1,6 +1,6 @@
 package Account;
 
-public class Account {
+public abstract class Account {
 	private double balance;
 	
 	public Account(double balance){
@@ -23,6 +23,8 @@ public class Account {
 	protected void changeBalance(double money){
 		balance = money;
 	}
+	public abstract double getWithdrawableAccount();
+	public abstract void passTime(int time);
 };
 
 	

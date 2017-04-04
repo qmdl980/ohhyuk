@@ -12,22 +12,34 @@ public class CheckingAccount extends Account{
 		this.loan_interest = loan_interest;
 	}
 	
-	@Override public void debit(double minus){
-		if(minus > credit_limit){
-			System.out.print("Debit amount is more thar credit limit! \n");
-		}else if(getBalance() < minus){
-			changeBalance(getBalance() - minus);
-			System.out.print("Balance is minus!");
-		}else {
-			changeBalance(getBalance() - minus);
+	public boolean isBankrupted(){
+		if(getBalance() < -(credit_limit)){
+			return true;
+		}else{
+			return false;
 		}
 	}
 	
-	public void nextMonth(){
+	@Override public void debit(double minus){
+		/*if(getBalance() < -(credit_limit){
+			System.out.print("Debit amount is more thar credit limit! \n");
+		} else {*/
+		changeBalance(getBalance() - minus);
+	}
+	
+	public void passTime(int time){
 		if(getBalance() < 0){
-			changeBalance(getBalance() + getBalance() * loan_interest);
+			changeBalance(getBalance() + getBalance() * (Math.pow((1 + loan_interest),time));
 		} else {
-			changeBalance(getBalance() + getBalance() * interest);
+			changeBalance(getBalance() + getBalance() * (Math.pow((1 + interest),time));
+		}
+	}
+	
+	public double getWithdrawableAccount(){
+		if(getBalance() < -(credit_limit)){
+			return 0;
+		}else{
+			return (getBalance() + credit_limit);
 		}
 	}
 };
